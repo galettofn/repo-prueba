@@ -1,0 +1,43 @@
+<h1>Catálogo</h1>
+<p>Explorá...</p>
+
+<div class="panel">
+  <div class="filter">
+    <label for="category">Filtrar por categoría</label>
+    <select
+      id="category"
+      #categorySelect
+      [value]="categoryFilter()"
+      (change)="categoryFilter.set(categorySelect.value)"
+    >
+      <option value="">Todas las categorías</option>
+      @for (c of categories; track $index) {
+        <option [value]="c">{{ c }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="filter">
+    <label for="sort">Ordenar por precio</label>
+    <select id="sort" #sortSelect [value]="sortOrder()" (change)="sortOrder.set(sortSelect.value)">
+      <option value="asc">Menor a mayor</option>
+      <option value="desc">Mayor a menor</option>
+      <option value="">Sin orden particular</option>
+    </select>
+  </div>
+
+  <p>{{ deviceAmout() }} productos</p>
+</div>
+
+<ul>
+  @for (device of filteredDevices(); track device.id) {
+    <li>
+      <app-device-card
+        [device]="device"
+        (navigationSelected)="navigateToDetails(device.id)"
+      ></app-device-card>
+    </li>
+  } @empty {
+    <li>No hay elementos para mostrar...</li>
+  }
+</ul>

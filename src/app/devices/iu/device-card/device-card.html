@@ -1,0 +1,13 @@
+@let device = this.device();
+<article>
+    <h2>{{ device.modelName }}</h2>
+    <p>{{ device.category }}</p>
+    <p>{{ device.brand }}</p>
+    <p>{{ device.salePrice }}</p>
+    <p>{{ device.material }}</p>
+    <p>{{ device.notes }}</p>
+    @if (device.isInStore) {
+        <p>En tienda</p>
+    }
+    <button (click)="navigationSelected.emit(device.id)">Ver detalles</button>
+</article>

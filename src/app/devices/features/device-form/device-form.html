@@ -1,0 +1,74 @@
+<h2>{{ isEditing() ? 'Editando Device' : 'Agregando Device' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="modelName">Nombre</label>
+    <input type="text" id="modelName" formControlName="modelName" />
+    @if (form.controls.modelName.touched && form.controls.modelName.invalid) {
+        <span>Nombre requerido (mínimo 3 caracteres)</span>
+    }
+  </div>
+
+  <div>
+    <label for="salePrice">Precio</label>
+    <input type="number" id="salePrice" formControlName="salePrice" /> 
+    @if (form.controls.salePrice.touched && form.controls.salePrice.invalid) {
+        <span>El precio mínimo es requerido</span>
+    }
+  </div>
+
+  <div>
+      <label for="category">Categoría</label>
+      <select id="category" formControlName="category">
+          <option value="" disabled>Seleccione una categoría</option>
+          @for (category of categories; track category) {
+              <option [value]="category">{{category}}</option>
+          }
+    @if (form.controls.category.touched && form.controls.category.invalid) {
+        <span>Categoría requerida</span>
+    }
+      </select>
+  </div>
+
+  <div>
+      <label for="brand">Marca</label>
+      <input type="text" id="brand" formControlName="brand" />
+    @if (form.controls.brand.touched && form.controls.brand.invalid) {
+        <span>Marca requerida (mínimo 3 caracteres)</span>
+    }
+  </div>
+
+  <div>
+      <label for="material">Material</label>
+      <input type="text" id="material" formControlName="material" />
+    @if (form.controls.material.touched && form.controls.material.invalid) {
+        <span>Material requerido (mínimo 3 caracteres)</span>
+    }
+  </div>
+
+  <div>
+      <label for="isInStore">En tienda</label>
+      <input type="checkbox" id="isInStore" formControlName="isInStore" />
+    @if (form.controls.isInStore.touched && form.controls.isInStore.invalid) {
+        <span>Este campo es requerido</span>
+    }
+  </div>
+  
+  <div>
+    <label for="notes">Notas</label>
+    <textarea id="notes" formControlName="notes" rows="4"></textarea>
+    @if (form.controls.notes.touched && form.controls.notes.invalid) {
+        <span>Notas requeridas</span>
+    }
+  </div>
+  <div>
+      <label for="cupProfile">Perfil de taza</label>
+      <input type="text" id="cupProfile" formControlName="cupProfile" />
+    @if (form.controls.cupProfile.touched && form.controls.cupProfile.invalid) {
+        <span>Perfil de taza requerido</span>
+    }
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Enviar</button>
+  <button type="button" (click)="form.reset()">Resetear</button>
+</form>

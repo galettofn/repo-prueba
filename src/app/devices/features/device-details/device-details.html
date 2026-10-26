@@ -1,0 +1,20 @@
+@let device = this.device();
+@if (device) {
+  <article>
+    <h2>{{ device.modelName }}</h2>
+    <p>{{ device.category }}</p>
+    <p>{{ device.salePrice }}</p>
+    <button (click)="isEditing.update((v) => !v)">
+         {{isEditing() ? 'Cancelar'  : 'Editar'}}
+    </button>
+    <button (click)="onDeleted()" [disabled]="isEditing()"> Borrar </button>
+    <button (click)="volver()">Volver</button>
+  </article>
+
+  @if (isEditing()) {
+      <app-device-form 
+        [editingDevice]="device"
+        (saved)="onEditedDevice($event)"
+      ></app-device-form> 
+  }
+}
